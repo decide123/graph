@@ -250,27 +250,27 @@ int drawAndPushButtons (const std::vector <Button>* buttons)
         {
         txSetColor (RGB (0, 0, 0));
         txSetFillColor (RGB (255, 255, 255));
-        txRectangle (buttons -> at(i).x, buttons -> at(i).y, buttons -> at(i).x + buttons -> at(i).sizeX, buttons -> at(i).y + buttons -> at(i).sizeY);
-        txDrawText (buttons -> at(i).x, buttons -> at(i).y, buttons -> at(i).x + buttons -> at(i).sizeX, buttons -> at(i).y + buttons -> at(i).sizeY, buttons -> at(i).funcName);
+        txRectangle (buttons[i].x, buttons[i].y, buttons[i].x + buttons[i].sizeX, buttons[i].y + buttons[i].sizeY);
+        txDrawText (buttons[i].x, buttons[i].y, buttons[i].x + buttons[i].sizeX, buttons[i].y + buttons[i].sizeY, buttons[i].funcName);
         }
 
-    for (int i = 0; i < bsize; i++)
+    for (int i = 0; i < arrayAmount; i++)
         {
         //printf ("i = %d", i);
-        BUTTONHIT checkResult = checkMouse(buttons -> at(i));
+        BUTTONHIT checkResult = checkMouse(buttons[i]);
 
         int checkResultUsed = int (checkResult);
 
         //printf("checkMouse = %d\n", checkResultUsed);
 
-        if (checkResult == HIT && buttons -> at(i).type == FUNC)      //////
+        if (checkResult == HIT && buttons[i].type == FUNC)      //////
             {
             //printf ("I do work!\n");
-            txSetColor (buttons -> at(i).Color);
+            txSetColor (buttons[i].Color);
 
-            if (buttons -> at(i).func != NULL)
+            if (buttons[i].func != NULL)
                 {
-                drawGraph (buttons -> at(i));
+                drawGraph (buttons[i]);
                 }
 
             return 1;
@@ -280,7 +280,7 @@ int drawAndPushButtons (const std::vector <Button>* buttons)
         //printf (("buttons[i].y = %lg", buttons[i].y));
         //printf (("buttons[i].func = %lg", buttons[i].func));
 
-        if (buttons -> at(i).type == ERASE && checkResult == HIT)
+        if (buttons[i].type == ERASE && checkResult == HIT)
             {
             txSetFillColor(RGB (0, 0, 0));
 
@@ -296,7 +296,7 @@ int drawAndPushButtons (const std::vector <Button>* buttons)
             return 2;
             }
 
-        if (buttons -> at(i).type == EXIT && checkResult == HIT)
+        if (buttons[i].type == EXIT && checkResult == HIT)
             {
             txMessageBox ("Программа Завершена", "graph.exe сообщает");
             printf ("exiting");
